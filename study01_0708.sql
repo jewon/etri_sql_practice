@@ -315,4 +315,10 @@ select e.*, l.lev as to_lev
     from temp e, emp_level l
     where (sysdate - birth_date) / 365 >= l.from_age and (sysdate - birth_date) / 365 < l.to_age
         and l.lev = '과장';
+select e.*, l.lev as to_lev, trunc((sysdate - birth_date) / 365) as age
+    from temp e, emp_level l
+    where e.birth_date
+        between add_months(sysdate, - l.to_age * 12)
+        and add_months(sysdate, - l.from_age * 12)
+        and l.lev = '과장';
         
