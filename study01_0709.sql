@@ -246,5 +246,3 @@ from temp left outer join tdept on (temp.dept_code = tdept.dept_code)
 group by decode('&grou1', '부서코드', temp.dept_code, '부서명', dept_name, '직급', lev, '취미', hobby, '채용형태', emp_type, emp_id),
     decode('&grou2', '부서코드', temp.dept_code, '부서명', dept_name, '직급', lev, '취미', hobby, '채용형태', emp_type, null)
 order by 1;
-
-select dept_code, count(*) from temp group by dept_code, null order by 1;
