@@ -255,7 +255,3 @@ from trol_user u, trol_priv r, tprivs p
 where u.role_cd = r.role_cd 
 and r.priv_id = p.priv_id 
 and crud_cd = 'D';
-
--- 1.
-select * from trol_user where role_cd like '%D';
-revoke 
