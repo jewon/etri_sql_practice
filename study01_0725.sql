@@ -1,5 +1,5 @@
 /*
-    0725
+    0725: Hierarchical Queries
 */
 -- 계층검색
 select employee_id, last_name, job_id, manager_id
@@ -215,6 +215,7 @@ from vemp_boss
 start with eid = 20180101
 connect by prior en = pn; -- 이름순 정렬
 
+-- 실습 데이터
 create table emp_boss as select * from vemp_boss;
 alter table emp_boss add constraint emp_boss_pk primary key (eid);
 create index inx_enm1 on emp_boss(en);
@@ -223,6 +224,7 @@ alter table emp_boss add salary number;
 update emp_boss
 set salary  = (select salary from temp where emp_id = eid);
 
+-- bonus: parent계층별 salary 합계 구하기
 select * from emp_boss;
 select lpad(eid, length(eid) + (level * 2) - 2, '-')eid, en, pid, pn, d, pd, salary, 
     (select sum(salary) from emp_boss t start with t.eid = e.eid connect by prior t.eid = t.pid) ssal
